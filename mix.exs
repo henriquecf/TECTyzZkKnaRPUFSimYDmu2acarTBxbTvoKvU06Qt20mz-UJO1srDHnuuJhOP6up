@@ -52,7 +52,8 @@ defmodule Askmybook.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:bumblebee, "~> 0.1"},
       {:nx, "~> 0.4"},
-      {:exla, "~> 0.4"}
+      {:exla, "~> 0.4"},
+      {:ex_faiss, github: "elixir-nx/ex_faiss"}
     ]
   end
 

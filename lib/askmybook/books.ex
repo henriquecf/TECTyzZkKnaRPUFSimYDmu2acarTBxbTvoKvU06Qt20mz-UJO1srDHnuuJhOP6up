@@ -19,6 +19,7 @@ defmodule Askmybook.Books do
   """
   def list_books do
     Repo.all(Book)
+    |> Repo.preload(:pages)
   end
 
   @doc """
@@ -35,7 +36,10 @@ defmodule Askmybook.Books do
       ** (Ecto.NoResultsError)
 
   """
-  def get_book!(id), do: Repo.get!(Book, id)
+  def get_book!(id) do
+    Repo.get!(Book, id)
+    |> Repo.preload(:pages)
+  end
 
   @doc """
   Creates a book.
