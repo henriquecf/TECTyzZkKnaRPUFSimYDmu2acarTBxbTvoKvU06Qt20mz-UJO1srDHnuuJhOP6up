@@ -35,3 +35,4 @@ askmybook-*.tar
 npm-debug.log
 /assets/node_modules/
 
+local_server.sh

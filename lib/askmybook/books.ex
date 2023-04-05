@@ -105,4 +105,42 @@ defmodule Askmybook.Books do
   def change_book(%Book{} = book, attrs \\ %{}) do
     Book.changeset(book, attrs)
   end
+
+  @doc """
+  Given a question, we should send a context to allow Chat-GPT to answer it.
+
+  The context is a list of pages from the book that are relevant to the question.
+
+  The relevance is calculated using the embedding of the question and the embedding of the pages.
+  """
+  def answer_from_book(book, query) do
+    prompt = """
+    #{book.author} is the author of #{book.name}.
+
+    Answer the following question: #{query}
+
+    I will provide you with the following pages from the book #{book.name} to help with your answer:
+
+    #{relevant_pages(book, query) |> Enum.map(& &1.raw_content) |> Enum.join("\n\n")}
+    """
+
+    case OpenAI.chat_completion(
+           model: "gpt-3.5-turbo",
+           messages: [
+             %{role: "user", content: prompt}
+           ]
+         ) do
+      {:ok, %{choices: [%{"message" => %{"content" => content}}]}} -> {:ok, content}
+      {:error, _} = error -> error
+    end
+  end
+
+  def relevant_pages(book, query) do
+    embedding = Askmybook.Model.predict(query)
+    %{labels: labels} = Askmybook.Index.search(embedding, 5)
+
+    ids = Nx.to_flat_list(labels)
+
+    Enum.filter(book.pages, fn page -> page.id in ids end)
+  end
 end

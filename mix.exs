@@ -53,7 +53,8 @@ defmodule Askmybook.MixProject do
       {:bumblebee, "~> 0.1"},
       {:nx, "~> 0.4"},
       {:exla, "~> 0.4"},
-      {:ex_faiss, github: "elixir-nx/ex_faiss"}
+      {:ex_faiss, github: "elixir-nx/ex_faiss"},
+      {:openai, "~> 0.4.1"}
     ]
   end
 
