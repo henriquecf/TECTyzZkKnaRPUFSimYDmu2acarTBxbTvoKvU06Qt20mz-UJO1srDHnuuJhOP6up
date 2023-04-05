@@ -16,6 +16,11 @@ defmodule Askmybook.Application do
       {Phoenix.PubSub, name: Askmybook.PubSub},
       # Start Finch
       {Finch, name: Askmybook.Finch},
+      {Nx.Serving,
+       serving: Askmybook.Model.serving([]),
+       name: AskmybookModel,
+       batch_size: 8,
+       batch_timeout: 100},
       # Start the Endpoint (http/https)
       AskmybookWeb.Endpoint
       # Start a worker by calling: Askmybook.Worker.start_link(arg)
