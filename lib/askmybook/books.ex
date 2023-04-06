@@ -106,6 +106,16 @@ defmodule Askmybook.Books do
     Book.changeset(book, attrs)
   end
 
+  def get_answer_by_book_and_question(book_id, question) do
+    Repo.get_by(Askmybook.Books.Answer, book_id: book_id, question: question)
+  end
+
+  def create_answer(book_id, question, answer) do
+    %Askmybook.Books.Answer{}
+    |> Askmybook.Books.Answer.changeset(%{book_id: book_id, question: question, answer: answer})
+    |> Repo.insert()
+  end
+
   @doc """
   Given a question, we should send a context to allow Chat-GPT to answer it.
 
@@ -114,6 +124,23 @@ defmodule Askmybook.Books do
   The relevance is calculated using the embedding of the question and the embedding of the pages.
   """
   def answer_from_book(book, query) do
+    case get_answer_by_book_and_question(book.id, query) do
+      nil ->
+        case answer_from_book_using_chat_gpt(book, query) do
+          {:ok, answer} ->
+            create_answer(book.id, query, answer)
+            {:ok, answer}
+
+          {:error, _} = error ->
+            error
+        end
+
+      %Askmybook.Books.Answer{answer: answer} ->
+        {:ok, answer}
+    end
+  end
+
+  def answer_from_book_using_chat_gpt(book, query) do
     prompt = """
     #{book.author} is the author of #{book.name}.
 
