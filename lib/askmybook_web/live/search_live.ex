@@ -9,6 +9,7 @@ defmodule AskmybookWeb.SearchLive do
       socket
       |> assign(:book, book)
       |> assign(:result, nil)
+      |> assign(:page_title, book.name)
 
     {:ok, socket}
   end
