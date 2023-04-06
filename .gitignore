@@ -36,3 +36,5 @@ npm-debug.log
 /assets/node_modules/
 
 local_server.sh
+.env
+postgres-data/
