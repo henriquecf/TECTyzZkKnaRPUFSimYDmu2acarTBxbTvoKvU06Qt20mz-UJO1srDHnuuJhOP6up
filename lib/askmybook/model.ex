@@ -1,6 +1,6 @@
 defmodule Askmybook.Model do
-  @batch_size 8
-  @sequence_length 32
+  @batch_size 128
+  @sequence_length 120
 
   def predict(text) do
     Nx.Serving.batched_run(AskmybookModel, text)

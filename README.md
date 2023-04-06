@@ -6,6 +6,7 @@ First we need to install dependencies:
   * Install and run Postgres on default port 5432
   * Install dependencies to run ML models:
     * On ubuntu: `sudo apt install build-essential cmake libblas-dev liblapack-dev`
+    * On mac: `brew install llvm cmake` and `export USE_LLVM_BREW=true`
 
 To start your Phoenix server:
 

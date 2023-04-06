@@ -20,6 +20,7 @@ pages =
   book_path
   |> File.read!()
   |> String.split("\n\n\n")
+  |> Enum.map(&String.trim/1)
   |> Enum.with_index(1)
   |> Enum.map(fn {page, index} ->
     embedding = Askmybook.Model.predict(page)

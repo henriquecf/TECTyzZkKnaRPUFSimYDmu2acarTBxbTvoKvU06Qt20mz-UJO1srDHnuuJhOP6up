@@ -17,17 +17,21 @@ defmodule Askmybook.Index do
   def init(_opts \\ []) do
     index = ExFaiss.Index.new(384, "IDMap,Flat")
 
-    [book | _] = Askmybook.Books.list_books()
-
     index =
-      book.pages
-      |> Enum.reduce(index, fn page, index ->
-        ExFaiss.Index.add_with_ids(
-          index,
-          Nx.from_binary(page.embedding, :f32),
-          Nx.tensor([page.id])
-        )
-      end)
+      case Askmybook.Books.list_books() do
+        [book | _] ->
+          book.pages
+          |> Enum.reduce(index, fn page, index ->
+            ExFaiss.Index.add_with_ids(
+              index,
+              Nx.from_binary(page.embedding, :f32),
+              Nx.tensor([page.id])
+            )
+          end)
+
+        _ ->
+          index
+      end
 
     {:ok, index}
   end
