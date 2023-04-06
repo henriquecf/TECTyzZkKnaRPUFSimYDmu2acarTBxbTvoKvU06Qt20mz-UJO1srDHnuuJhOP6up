@@ -25,9 +25,9 @@ To start your Phoenix server:
 
   * Open `docker-compose.yaml` and change `OPENAI_API_KEY` to a valid value
   * Run `docker-compose up`
-  
+
 Should take some minutes. Once you see something like this:
 
-![Screenshot from 2023-04-06 16-08-58](https://user-images.githubusercontent.com/3901045/230472596-03c34957-685f-4cf2-a1d4-c7c8518f090a.png)
+![docker-compose up finished](https://user-images.githubusercontent.com/3901045/230472596-03c34957-685f-4cf2-a1d4-c7c8518f090a.png)
 
 You can visit [`localhost:4000`](http://localhost:4000) from your browser.
