@@ -12,11 +12,7 @@ WORKDIR /app
 
 # Install Phoenix packages
 RUN mix local.hex --force && \
-    mix local.rebar --force && \
-    mix archive.install --force hex phx_new 1.7.2
-
-
-WORKDIR /app
+    mix local.rebar --force
 
 RUN mix deps.get
 
