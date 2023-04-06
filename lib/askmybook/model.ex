@@ -15,7 +15,7 @@ defmodule Askmybook.Model do
 
     {_init_fn, predict_fn} = Axon.build(model, compiler: EXLA)
 
-    Nx.Serving.new(fn ->
+    Nx.Serving.new(fn _ ->
       fn %{size: size} = inputs ->
         inputs = Nx.Batch.pad(inputs, @batch_size - size)
         predict_fn.(params, inputs)[:pooled_state]

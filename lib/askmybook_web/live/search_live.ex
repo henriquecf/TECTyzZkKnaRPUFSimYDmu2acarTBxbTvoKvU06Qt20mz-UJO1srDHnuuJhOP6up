@@ -10,6 +10,7 @@ defmodule AskmybookWeb.SearchLive do
       |> assign(:book, book)
       |> assign(:result, nil)
       |> assign(:page_title, book.name)
+      |> assign(:query, "")
 
     {:ok, socket}
   end
@@ -18,8 +19,13 @@ defmodule AskmybookWeb.SearchLive do
   def handle_event("search_for_books", %{"query" => query}, socket) do
     socket =
       case Askmybook.Books.answer_from_book(socket.assigns.book, query) do
-        {:ok, answer} -> assign(socket, :result, answer)
-        {:error, error} -> assign(socket, :result, inspect(error))
+        {:ok, answer} ->
+          socket
+          |> assign(:result, answer)
+          |> assign(:query, "")
+
+        {:error, error} ->
+          assign(socket, :result, inspect(error))
       end
 
     {:noreply, socket}

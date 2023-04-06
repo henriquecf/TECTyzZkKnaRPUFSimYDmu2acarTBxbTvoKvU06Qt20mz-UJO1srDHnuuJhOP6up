@@ -28,4 +28,4 @@ pages =
   end)
 
 {:ok, _book} =
-  Books.create_book(%{name: "Modern CSS with Tailwind", author: "Adam Wathan", pages: pages})
+  Books.create_book(%{name: "Modern CSS with Tailwind", author: "Noel Rappin", pages: pages})
