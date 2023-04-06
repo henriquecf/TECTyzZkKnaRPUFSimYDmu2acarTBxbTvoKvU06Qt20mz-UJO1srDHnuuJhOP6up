@@ -1,18 +1,17 @@
 # Askmybook
 
+First we need to install dependencies:
+
+  * Install elixir: https://elixir-lang.org/install.html
+  * Install and run Postgres on default port 5432
+  * Install dependencies to run ML models:
+    * On ubuntu: `sudo apt install build-essential cmake libblas-dev liblapack-dev`
+
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+  * On the first setup, also run `mix ecto.setup`
+  * Add env variable for OpenAI: `export OPENAI_API_KEY=sk-rMAzgGXLelykdsadjaslfska`
+  * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
-
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
-
-## Learn more
-
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
