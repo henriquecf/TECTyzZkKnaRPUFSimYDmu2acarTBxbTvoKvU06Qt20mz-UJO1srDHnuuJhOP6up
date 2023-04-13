@@ -17,6 +17,17 @@ Given that, we chose Elixir because it has the capabilities of getting models fr
 
 And Elixir also has great capabilities of substitution for both Rails and React, using Phoenix and Phoenix LiveView. So we have a SPA like behaviour with great testing and functionality in a single language.
 
+On Macbook with M1 chip:
+
+  * Run `brew install elixir`
+  * Install deps for ML models `brew install cmake llvm` -> follow instructions for post installation (given when installation finishes)
+  * Make sure Postgres is installed and running
+  * Set postgres username / password are postgres / postgres. If yours is different change `config/dev.exs` file
+  * Run `mix deps.get`
+  * Run `mix ecto.setup`
+  * Run `OPENAI_API_KEY="YOUR_KEY" mix phx.server`
+  * Visit [`localhost:4000`](http://localhost:4000) from your browser
+
 First we need to install dependencies:
 
   * Make sure you have docker and docker-compose installed and running
