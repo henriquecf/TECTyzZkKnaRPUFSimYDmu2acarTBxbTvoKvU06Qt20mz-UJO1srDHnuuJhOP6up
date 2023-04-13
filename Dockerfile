@@ -1,10 +1,6 @@
 FROM elixir:latest
 
-RUN apt update && apt install -y cmake libblas-dev liblapack-dev wget postgresql-client
-
-RUN wget https://github.com/bazelbuild/bazelisk/releases/download/v1.16.0/bazelisk-linux-amd64 && \
-    mv bazelisk-linux-amd64 /usr/local/bin/bazel && \
-    chmod +x /usr/local/bin/bazel
+RUN apt update && apt install -y build-essential cmake libblas-dev liblapack-dev postgresql-client
 
 RUN mkdir /app
 COPY . /app
@@ -15,5 +11,7 @@ RUN mix local.hex --force && \
     mix local.rebar --force
 
 RUN mix deps.get
+
+RUN mix deps.compile
 
 CMD ["/app/entrypoint.sh"]
